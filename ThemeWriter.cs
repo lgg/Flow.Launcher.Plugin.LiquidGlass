@@ -136,16 +136,6 @@ namespace Flow.Launcher.Plugin.LiquidGlass
         </Setter>
     </Style>
     <Style x:Key=""ScrollBarStyle"" BasedOn=""{{StaticResource BaseScrollBarStyle}}"" TargetType=""{{x:Type ScrollBar}}"" />
-    <Style x:Key=""HorizontalScrollBarStyle"" BasedOn=""{{StaticResource BaseHorizontalScrollBarStyle}}"" TargetType=""{{x:Type ScrollBar}}"" />
-    <Style x:Key=""HorizontalThumbStyle"" BasedOn=""{{StaticResource BaseHorizontalThumbStyle}}"" TargetType=""{{x:Type Thumb}}"">
-        <Setter Property=""Template"">
-            <Setter.Value>
-                <ControlTemplate TargetType=""{{x:Type Thumb}}"">
-                    <Border Background=""{thumb}"" BorderBrush=""Transparent"" BorderThickness=""0"" CornerRadius=""3"" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <Style x:Key=""SearchIconStyle"" BasedOn=""{{StaticResource BaseSearchIconStyle}}"" TargetType=""{{x:Type Path}}"">
         <Setter Property=""Fill"" Value=""{sub}"" />
         <Setter Property=""Width"" Value=""24"" />

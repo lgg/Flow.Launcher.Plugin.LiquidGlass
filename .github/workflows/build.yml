@@ -2,9 +2,7 @@ name: Build
 
 on:
   push:
-    branches: ['**']
-    tags: ['v*']
-  pull_request:
+    branches: [main]
   workflow_dispatch:
     inputs:
       release_tag:
@@ -20,6 +18,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check theme compatibility (Flow Launcher 2.0.0-2.1.4)
+        shell: pwsh
+        run: ./tests/check-theme-compatibility.ps1
 
       - uses: actions/setup-dotnet@v4
         with:

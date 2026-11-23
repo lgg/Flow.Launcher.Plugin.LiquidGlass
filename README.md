@@ -32,7 +32,7 @@ The background is captured once, synchronously, when the window is shown (before
 
 ## Install
 
-From the Flow Launcher plugin store (once approved), or manually: download `Flow.Launcher.Plugin.LiquidGlass.zip` from [Releases](https://github.com/NblScript/Flow.Launcher.Plugin.LiquidGlass/releases), unzip it into
+From the Flow Launcher plugin store (once approved), or manually: download `Flow.Launcher.Plugin.LiquidGlass.zip` from the successful [Actions build](https://github.com/lgg/Flow.Launcher.Plugin.LiquidGlass/actions/workflows/build.yml), unzip it into
 
 ```
 %APPDATA%\FlowLauncher\Plugins\LiquidGlass\
@@ -62,6 +62,14 @@ Type `glass` in Flow:
 Labels are shown in English, or in Chinese when Flow's language is set to Chinese.
 
 If you manually switch to another theme in Flow settings, the plugin disables itself and will not take the theme back. Type `glass` and press Enter to turn it on again.
+
+## Stable Flow Launcher compatibility (this fork, v1.0.2)
+
+Flow Launcher 2.0.0 through 2.1.4 do not define `BaseHorizontalScrollBarStyle` and `BaseHorizontalThumbStyle`. The original theme generator referenced both styles, so WPF rejected the complete Liquid Glass theme. This fork removes only the unused horizontal-scrollbar style overrides; it preserves the existing vertical scrollbar styling, glass shader, refraction, and settings.
+
+The build includes a no-dependency static check against the base resource keys shared by Flow Launcher 2.0.0, 2.1.0, and 2.1.4. This does not replace an interactive test on Windows.
+
+**Note:** This fork uses the same plugin ID as the original. Disable or remove the old installed copy before manually installing this build, to avoid loading two copies of the same plugin.
 
 ## Known limitations
 
