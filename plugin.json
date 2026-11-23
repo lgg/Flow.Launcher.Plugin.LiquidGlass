@@ -4,7 +4,7 @@
   "Name": "Liquid Glass",
   "Description": "Turns the Flow Launcher window into liquid glass: backdrop refraction, edge dispersion and a dynamic highlight",
   "Author": "qingking",
-  "Version": "1.0.2",
+  "Version": "1.0.3",
   "Language": "csharp",
   "Website": "https://github.com/lgg/Flow.Launcher.Plugin.LiquidGlass",
   "ExecuteFileName": "Flow.Launcher.Plugin.LiquidGlass.dll",

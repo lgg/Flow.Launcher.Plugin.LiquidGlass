@@ -44,10 +44,18 @@ jobs:
           name: Flow.Launcher.Plugin.LiquidGlass
           path: Flow.Launcher.Plugin.LiquidGlass.zip
 
+      - name: Read version for release
+        id: version
+        shell: pwsh
+        run: |
+          $version = (Get-Content plugin.json -Raw | ConvertFrom-Json).Version
+          "tag=v$version" >> $env:GITHUB_OUTPUT
+
       - name: Release
-        if: startsWith(github.ref, 'refs/tags/v') || inputs.release_tag != ''
+        # Publish on the same successful push as the build, without a second CI run.
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || inputs.release_tag != ''
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.release_tag || github.ref_name }}
+          tag_name: ${{ inputs.release_tag || steps.version.outputs.tag }}
           target_commitish: ${{ github.sha }}
           files: Flow.Launcher.Plugin.LiquidGlass.zip

@@ -168,7 +168,14 @@ namespace Flow.Launcher.Plugin.LiquidGlass
     <CornerRadius x:Key=""ItemRadius"">12</CornerRadius>
     <Thickness x:Key=""ItemMargin"">10 0 10 0</Thickness>
     <Thickness x:Key=""ResultMargin"">0 0 0 10</Thickness>
-    <Style x:Key=""ClockPanel"" BasedOn=""{{StaticResource BaseClockPanel}}"" TargetType=""{{x:Type StackPanel}}"">
+    <!--
+        The stable Flow Launcher ClockPanel uses a vertical stack. Inheriting
+        BaseClockPanel directly switches it back to horizontal and joins the
+        clock/date text without spacing. Keep the native layout and let Flow
+        manage per-item visibility; Collapsed elements take no space.
+    -->
+    <Style x:Key=""ClockPanel"" BasedOn=""{{StaticResource ClockPanel}}"" TargetType=""{{x:Type StackPanel}}"">
+        <Setter Property=""Orientation"" Value=""Vertical"" />
         <Setter Property=""Margin"" Value=""0 0 54 0"" />
     </Style>
     <Style x:Key=""ClockBox"" BasedOn=""{{StaticResource BaseClockBox}}"" TargetType=""{{x:Type TextBlock}}"">

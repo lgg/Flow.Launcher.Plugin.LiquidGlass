@@ -71,6 +71,19 @@ The build includes a no-dependency static check against the base resource keys s
 
 **Note:** This fork uses the same plugin ID as the original. Disable or remove the old installed copy before manually installing this build, to avoid loading two copies of the same plugin.
 
+## Clock/date layout fix (v1.0.3)
+
+The previous generated theme inherited `BaseClockPanel`, which is horizontal; stable Flow Launcher themes use the vertical `ClockPanel` style. When the clock and date were both enabled, they were displayed together as a single unspaced line. This fix restores the native vertical layout without touching clock/date visibility or formatting.
+
+On Windows, check these four combinations in Flow Launcher settings:
+
+- Clock + Date: clock above date, without overlap.
+- Clock only: one visible clock line.
+- Date only: one visible date line.
+- Neither: no clock or date.
+ 
+The existing `ClockBox` and `DateBox` base styles retain Flow's visibility-dependent font sizes and margins. An automated static regression check guards these style relationships; the four actual display modes still require a Windows UI smoke test.
+
 ## Known limitations
 
 - Refraction mode uses a snapshot of the background taken when the window opens. If a video is playing behind it, enable "live refresh" (costs some CPU).

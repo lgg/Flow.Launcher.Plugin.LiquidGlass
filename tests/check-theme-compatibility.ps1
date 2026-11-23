@@ -25,5 +25,21 @@ if ($plugin.Version -ne $project.Project.PropertyGroup.Version) {
     throw "Plugin version $($plugin.Version) does not match project version $($project.Project.PropertyGroup.Version)"
 }
 
+# Regression guard for clock/date layout. The normal Flow Launcher ClockPanel
+# is vertical on 2.0.0, 2.1.0 and 2.1.4; BaseClockPanel is horizontal.
+$clockPanel = [regex]::Match($themeWriter, '<Style x:Key=""ClockPanel""[\s\S]*?</Style>').Value
+if (-not $clockPanel.Contains('BasedOn=""{{StaticResource ClockPanel}}""') -or
+    -not $clockPanel.Contains('<Setter Property=""Orientation"" Value=""Vertical"" />')) {
+    throw "Liquid Glass must inherit the native vertical ClockPanel layout."
+}
+foreach ($name in @('ClockBox', 'DateBox')) {
+    $item = [regex]::Match($themeWriter, '<Style x:Key=""' + $name + '""[\s\S]*?</Style>').Value
+    if (-not $item.Contains('BasedOn=""{{StaticResource Base' + $name + '}}""') -or
+        $item.Contains('Property=""Visibility""')) {
+        throw "$name must inherit Flow's visibility-dependent styles without overriding visibility."
+    }
+}
+
 Write-Host "Theme references OK: $($references.Count) base styles are present in stable Flow Launcher."
+Write-Host "Clock/date layout OK: native vertical stack with independent visibility."
 Write-Host "Version consistency OK: $($plugin.Version)."
